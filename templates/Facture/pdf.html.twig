@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facture #{{ facture.id }}</title>
+    <style>
+        body { font-family: "DejaVu Sans", sans-serif; }
+        .header { text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        .badge-payee { color: white; background-color: green; padding: 4px 8px; border-radius: 4px; }
+        .badge-attente { color: black; background-color: yellow; padding: 4px 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Facture #{{ facture.id }}</h1>
+    <h3>{{ facture.client.nom }}</h3>
+    <p>{{ facture.client.email }} | {{ facture.client.telephone }}</p>
+</div>
+<table>
+    <tr>
+        <th>Date d'émission</th>
+        <td>{{ facture.dateEmission|date('d/m/Y') }}</td>
+    </tr>
+    <tr>
+        <th>Montant</th>
+        <td>{{ facture.montant }} €</td>
+    </tr>
+    <tr>
+        <th>Statut</th>
+        <td>
+            {% if facture.statut == 'payee' %}
+                <span class="badge-payee">Payée</span>
+            {% else %}
+                <span class="badge-attente">En attente</span>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+</body>
+</html>

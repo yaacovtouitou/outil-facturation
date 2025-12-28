@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le client{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Modifier le client</h1>
+
+    {{ form_start(form) }}
+    <div class="mb-3">{{ form_label(form.nom) }} {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }} {{ form_errors(form.nom) }}</div>
+    <div class="mb-3">{{ form_label(form.prenom) }} {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }} {{ form_errors(form.prenom) }}</div>
+    <div class="mb-3">{{ form_label(form.adresse) }} {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }} {{ form_errors(form.adresse) }}</div>
+    <div class="mb-3">{{ form_label(form.email) }} {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }} {{ form_errors(form.email) }}</div>
+    <div class="mb-3">{{ form_label(form.telephone) }} {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }} {{ form_errors(form.telephone) }}</div>
+    <button class="btn btn-primary">Enregistrer</button>
+    <a href="{{ path('client_list') }}" class="btn btn-secondary">Annuler</a>
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,12 @@
+client_list:
+    path: /clients
+    controller: App\Controller\ClientController::list
+client_new:
+    path: /clients/new
+    controller: App\Controller\ClientController::new
+client_edit:
+    path: /clients/{id}/edit
+    controller: App\Controller\ClientController::edit
+client_delete:
+    path: /clients/{id}/delete
+    controller: App\Controller\ClientController::delete

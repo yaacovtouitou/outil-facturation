@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la facture{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Modifier la facture #{{ facture.id }}</h1>
+
+    <div class="alert alert-info">
+        Le montant total est calculé automatiquement en fonction des prestations : <strong>{{ facture.total|number_format(2, ',', ' ') }} €</strong>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="mb-3">{{ form_label(form.client) }} {{ form_widget(form.client, {'attr': {'class': 'form-select'}}) }}</div>
+    <div class="mb-3">{{ form_label(form.statut) }} {{ form_widget(form.statut, {'attr': {'class': 'form-select'}}) }}</div>
+
+    <button class="btn btn-primary">Enregistrer</button>
+    <a href="{{ path('facture_list') }}" class="btn btn-secondary">Annuler</a>
+    {{ form_end(form) }}
+{% endblock %}

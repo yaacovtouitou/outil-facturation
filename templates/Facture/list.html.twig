@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Factures{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 fw-bold text-dark mb-1">Factures</h1>
+            <p class="text-muted">Gérez l'ensemble de vos factures clients.</p>
+        </div>
+        <a href="{{ path('facture_new') }}" class="btn btn-success shadow-sm">
+            <i class="bi bi-plus-lg"></i> Créer une facture
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                <tr>
+                    <th class="ps-4">Numéro</th>
+                    <th>Client</th>
+                    <th>Date d'émission</th>
+                    <th>Statut</th>
+                    <th class="text-end">Total TTC</th>
+                    <th class="text-end pe-4">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for facture in factures %}
+                    <tr>
+                        <td class="ps-4">
+                            <span class="fw-bold text-primary">#{{ '%05d'|format(facture.id) }}</span>
+                        </td>
+                        <td>
+                            <div class="fw-medium">{{ facture.client.nom }} {{ facture.client.prenom }}</div>
+                        </td>
+                        <td class="text-muted">{{ facture.dateEmission|date('d/m/Y') }}</td>
+                        <td>
+                            {% if facture.statut == 'payee' %}
+                                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">
+                                    <i class="bi bi-check-circle me-1"></i> Payée
+                                </span>
+                            {% else %}
+                                <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2 rounded-pill">
+                                    <i class="bi bi-clock me-1"></i> En attente
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end fw-bold fs-6">{{ facture.total|number_format(2, ',', ' ') }} €</td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group">
+                                <a href="{{ path('facture_pdf', {'id': facture.id}) }}" class="btn btn-sm btn-outline-secondary" title="PDF">
+                                    <i class="bi bi-file-pdf"></i>
+                                </a>
+                                <a href="{{ path('facture_edit', {'id': facture.id}) }}" class="btn btn-sm btn-outline-primary" title="Éditer">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{{ path('facture_delete', {'id': facture.id}) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer cette facture ?');" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <div class="text-muted">
+                                <i class="bi bi-files fs-1 d-block mb-3 opacity-50"></i>
+                                Aucune facture pour le moment.
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

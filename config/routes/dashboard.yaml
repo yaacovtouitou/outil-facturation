@@ -1,0 +1,3 @@
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index

@@ -1,0 +1,15 @@
+facture_list:
+    path: /factures
+    controller: App\Controller\FactureController::list
+facture_new:
+    path: /facture/new
+    controller: App\Controller\FactureController::new
+facture_edit:
+    path: /facture/{id}/edit
+    controller: App\Controller\FactureController::edit
+facture_delete:
+    path: /facture/{id}/delete
+    controller: App\Controller\FactureController::delete
+facture_pdf:
+    path: /facture/{id}/pdf
+    controller: App\Controller\FactureController::pdf
